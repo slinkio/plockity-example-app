@@ -1,8 +1,12 @@
-module.exports = function(app) {
-  var express = require('express');
+var express = require('express'),
+    handler = require('../handlers/example');
+
+module.exports = function( app ) {
   var exampleRouter = express.Router();
-  exampleRouter.get('/', function(req, res) {
-    res.send({example:[]});
-  });
+
+  exampleRouter.get('/', handler.fetch);
+  exampleRouter.post('/', handler.create);
+  exampleRouter.post('/compare', handler.compare);
+
   app.use('/api/example', exampleRouter);
 };
